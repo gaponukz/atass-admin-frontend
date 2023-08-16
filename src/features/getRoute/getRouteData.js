@@ -12,10 +12,20 @@ export const getRouteGeneralInfo = createAsyncThunk("generalRoute/getRouteGenera
      return response.data
 })
 
+export const getRouteFamillyInfo = createAsyncThunk("generalRoute/getRouteFamillyInfo", async ({move_from, move_to}) => {
+     const response = await axios.get(`${BASE_URL}/get_routes_family?move_from_city=${move_from}&move_to_city=${move_to}`, {
+          
+     })
+     // console.log(response.data);
+ 
+     return response.data
+})
+ 
 const routeLogic = createSlice({
      name: "generalRoute",
      initialState: {
-        routes: []
+        routes: [],
+        familly_routes: []
      },
      reducers: {},
      extraReducers : (builder) => {
@@ -29,6 +39,17 @@ const routeLogic = createSlice({
                     state.routes = [...action.payload];
                })
                .addCase(getRouteGeneralInfo.rejected, (state, action) => {
+                    //console.log("-");
+               })
+               .addCase(getRouteFamillyInfo.pending, (state) => {
+                    //console.log("?");
+               })
+               .addCase(getRouteFamillyInfo.fulfilled, (state, action) => {
+                    //console.log("+");
+                    //console.log(action.payload);
+                    state.familly_routes = [...action.payload]
+               })
+               .addCase(getRouteFamillyInfo.rejected, (state, action) => {
                     //console.log("-");
                })
      }

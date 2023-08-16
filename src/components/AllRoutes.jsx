@@ -14,15 +14,14 @@ const AllRoutes = () => {
           dispatch(getRouteGeneralInfo())
      }, [])
 
-     console.log(routes);
+     // console.log(routes);
 
      return (
           <div className='p-8'>
                <div className='flex flex-row items-center justify-center gap-1'>
                     <div className='border-2 border-gray-300 rounded-lg w-2/4 mt-[50px]'>
-
-                         {routes?.map((route, index) => (
-                              <NavLink className='no-underline text-black' to={`route/${route.move_from.city.toLowerCase()}`} key={route.move_from.id}>
+                         {routes?.map((route) => (
+                              <NavLink className='no-underline text-black' to={`route?move_from_city=${route.move_from.city}&move_to_city=${route.move_to.city}`} key={route.move_from.city}>
                                    <div className='border-b-2 border-gray-300'>
                                         <div className='relative p-4'>
                                              <div className='flex flex-row gap-1'>
@@ -37,7 +36,6 @@ const AllRoutes = () => {
                                    </div>
                               </NavLink>
                          ))}
-
                     </div>
                     
                     <NavLink className='border-2 border-gray-300 mt-[-300px] px-[16px] py-[4px] rounded-lg text-xl no-underline text-black' to="/create-route-1">
