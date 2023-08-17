@@ -9,6 +9,7 @@ import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import { useLocation } from "react-router-dom"
 import { getRouteFamillyInfo } from "../features/getRoute/getRouteData"
+import ShowInfoDetail from './ShowInfoDetail';
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
@@ -24,7 +25,7 @@ const RouteFamilly = () => {
      const move_to_city = searchParams.get("move_to_city")
      const familly_routes = useSelector(state => state.routeGeneral.familly_routes)
 
-     console.log(move_from_city, move_to_city, familly_routes);
+     // console.log(move_from_city, move_to_city, familly_routes);
 
      useEffect(() => {
           dispatch(getRouteFamillyInfo({ move_from: move_from_city, move_to: move_to_city }))
@@ -38,6 +39,8 @@ const RouteFamilly = () => {
      const [openDelete, setOpenDelete] = useState(false);
      const handleOpenDelete = () => setOpenDelete(true);
      const handleCloseDelete = () => setOpenDelete(false);
+
+     const [selectedRoute, setSelectedRoute] = useState({});
 
      return (
           <>
@@ -55,10 +58,7 @@ const RouteFamilly = () => {
                                    aria-describedby="modal-modal-description"
                                    className='flex flex-row justify-center items-center'
                               >
-                                   <div className='w-[300px] h-[200px] bg-white text-black '>
-                                        Show
-                                   </div>
-                                   {/* <ShowInfoDetail info={route[0]}/> */}
+                                   <ShowInfoDetail info={selectedRoute}/>
                               </Modal>
 
                               <Modal
@@ -73,7 +73,7 @@ const RouteFamilly = () => {
 
                                         <div className='w-auto'>
                                              <Button variant="outlined" color="error"
-                                                  onClick={() => { console.log("tyt"); }}
+                                                  onClick={() => { console.log("delete"); }}
                                              >
                                                   Видалити
                                              </Button>
@@ -82,37 +82,39 @@ const RouteFamilly = () => {
                               </Modal>
 
                               {familly_routes.map((route, index) => (
-                                   <>
-                                        <div className='flex flex-row border-b-2 border-gray-300' key={route.move_from.id}>
-                                             <Checkbox {...label} defaultChecked />
-                                             <div key={index}>
-                                                  <div className=''>
-                                                       <div className='relative px-1'>
-                                                            <div className='flex flex-row gap-1 '>
-                                                                 <div className='mt-3 flex flex-row gap-1'>
-                                                                      <p className=''>{route.move_from.place.city}</p>-<p className=' '>{route.move_to.place.city},</p>
-                                                                      <p>{route.move_from.date}</p>
-                                                                 </div>
+
+                                   <div className='flex flex-row border-b-2 border-gray-300' key={route.move_from.id}>
+                                        <Checkbox {...label} defaultChecked />
+                                        <div key={index}>
+                                             <div className=''>
+                                                  <div className='relative px-1'>
+                                                       <div className='flex flex-row gap-1 '>
+                                                            <div className='mt-3 flex flex-row gap-1'>
+                                                                 <p className=''>{route.move_from.place.city}</p>-<p className=' '>{route.move_to.place.city},</p>
+                                                                 <p>{route.move_from.date}</p>
                                                             </div>
                                                        </div>
                                                   </div>
                                              </div>
-                                             <div className='ml-auto mr-4 gap-1 flex flex-row mt-2'>
-                                                  <div className=''>
-                                                       <button onClick={() => {
-                                                            console.log("click");
-                                                       }} ><NavLink to="/edit-route-1"><CiEdit className='no-underline text-black mt-1 mr-4' size={25} /></NavLink></button>
-                                                  </div>
-                                                  <div className=''>
-                                                       <Button onClick={handleOpenDelete} ><AiFillDelete className='no-underline text-black' size={23} /></Button>
-                                                  </div>
-                                                  <div className=''>
-                                                       <Button onClick={handleOpenShow} ><BiShow className='no-underline text-black' size={23} /></Button>
-                                                  </div>
-
-                                             </div>
                                         </div>
-                                   </>
+                                        <div className='ml-auto mr-4 gap-1 flex flex-row mt-2'>
+                                             <div className=''>
+                                                  <button onClick={() => {
+                                                       console.log("click");
+                                                  }} ><NavLink to="/edit-route-1"><CiEdit className='no-underline text-black mt-1 mr-4' size={25} /></NavLink></button>
+                                             </div>
+                                             <div className=''>
+                                                  <Button onClick={handleOpenDelete} ><AiFillDelete className='no-underline text-black' size={23} /></Button>
+                                             </div>
+                                             <div className=''>
+                                                  <Button onClick={() => {
+                                                       setSelectedRoute(familly_routes[index])
+                                                       handleOpenShow()
+                                                  }} ><BiShow className='no-underline text-black' size={23} /></Button>
+                                             </div>
+
+                                        </div>
+                                   </div>
                               ))}
                          </div>
                     </div>
