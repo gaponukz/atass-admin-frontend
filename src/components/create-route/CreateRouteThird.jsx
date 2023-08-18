@@ -135,7 +135,7 @@ const CreateRouteThird = () => {
 
                         <Button
                             onClick={() => {
-                                // let time = days + " " + hours + " " + minutes;
+                                
                                 if (!days) 
                                   setDays(0);
                                 else if (!hours)
@@ -144,7 +144,7 @@ const CreateRouteThird = () => {
                                   setMinutes(0);
 
                                 let time = days * 86400 + hours * 3600 + minutes * 60
-                                //console.log(time);
+                                
                                 dispatch(addSubSpot(country, city, street, map, time))
                                 setCountry("");
                                 setCity("");
@@ -155,7 +155,6 @@ const CreateRouteThird = () => {
                                 setMinutes("");
 
                                 handleCloseShow();
-
                             }}
                             variant="contained"
                         >Підтвердити</Button>
@@ -186,16 +185,12 @@ const CreateRouteThird = () => {
                                 </div>
                             </div>
                             <p>Прибуде через: Днів: {Math.floor(obj.from_start / 86400).toString().padStart(1, "0")} Годин: {
-                              (Math.floor(obj.from_start / 3600).toString().padStart(1, "0") === "24") ? (<>0</>) : (<>{Math.floor(obj.from_start / 3600).toString().padStart(1, "0")}</>)
-                            } </p>
-                            {/* {obj.from_start.split(" ").length === 3 ? <p>Прибуде через: Днів: {obj.from_start.split(" ")[0]}, Годин: {obj.from_start.split(" ")[1]}, Хвилин: {obj.from_start.split(" ")[2]} minutes</p> :
-                                <p>Прибуде через : Годин: {obj.from_start.split(" ")[0]}, Хвилин: {obj.from_start.split(" ")[1]}</p>} */}
-                            {/* <p className="mt-[-15px]">Прибуде через: {obj.from_start.split(" ")[0]}</p> */}
+                              (Math.floor(obj.from_start / 3600).toString().padStart(1, "0") === "24") ? (<>0</>) : (<>{Math.floor(obj.from_start % 86400 / 3600).toString().padStart(1, "0")}</>)
+                            } Хвилин: {
+                                (Math.floor(obj.from_start / 60).toString().padStart(1, "0") === "1440") ? (<>0</>) : (<>{(Math.floor(obj.from_start % 3600 / 60)).toString().padStart(1, "0")}</>)
+                            }</p>
                             <hr />
-
-
                         </div>))}
-
                     <div
                         onClick={handleOpenShow}
                         className="border-2 border-gray-800 h-[40px] w-[88px] rounded-lg flex justify-center items-center"
@@ -219,8 +214,6 @@ const CreateRouteThird = () => {
 
                     </div>
                 </form>
-
-
             </div>
         </div>
   )
