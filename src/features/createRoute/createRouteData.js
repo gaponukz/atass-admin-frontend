@@ -8,7 +8,7 @@ const createRouteLogic = createSlice({
      initialState: {
           steps: {
                firstStep: true,
-               secondStep: false,
+               secondStep: true,
                thirdStep: false,
                fourthStep: false,
           },
@@ -61,38 +61,63 @@ const createRouteLogic = createSlice({
      reducers: {
           createRoute1: {
                reducer(state, action) {
-                   //console.log("here2 -> ", action.payload);
-                   state.new_route["route_prototype"]["move_from"] = {
-                       "place": {
-                           "country": action.payload.fromCountry,
-                           "city": action.payload.fromCity,
-                           "street": action.payload.fromStreet,
-                           "map_url": action.payload.map1,
-                       },
-                       "id": nanoid()
-                   }
-   
-                   state.new_route["route_prototype"]["move_to"] = {
-                       "place": {
-                           "country": action.payload.toCountry,
-                           "city": action.payload.toCity,
-                           "street": action.payload.toStreet,
-                           "map_url": action.payload.map2,
-                       },
-                       "id": nanoid()
-                   }
-   
-                   state.new_route["route_prototype"]["passengers_number"] = action.payload.numberPlaces
+                    //console.log("here2 -> ", action.payload);
+                    state.new_route["route_prototype"]["move_from"] = {
+                         "place": {
+                              "country": action.payload.fromCountry,
+                              "city": action.payload.fromCity,
+                              "street": action.payload.fromStreet,
+                              "map_url": action.payload.map1,
+                         },
+                         "id": nanoid()
+                    }
+
+                    state.new_route["route_prototype"]["move_to"] = {
+                         "place": {
+                              "country": action.payload.toCountry,
+                              "city": action.payload.toCity,
+                              "street": action.payload.toStreet,
+                              "map_url": action.payload.map2,
+                         },
+                         "id": nanoid()
+                    }
+
+                    state.new_route["route_prototype"]["passengers_number"] = action.payload.numberPlaces
                },
                prepare(fromCountry, fromCity, fromStreet, toCountry, toCity, toStreet, numberPlaces, map1, map2) {
-                   return {
-                       payload: {
-                           fromCountry, fromCity, fromStreet, toCountry, toCity, toStreet, numberPlaces, map1, map2
-                       }
-   
-                   }
+                    return {
+                         payload: {
+                              fromCountry, fromCity, fromStreet, toCountry, toCity, toStreet, numberPlaces, map1, map2
+                         }
+                    }
                }
-           },
+          },
+          createRoute2: {
+               reducer(state, action) {
+                    //console.log("here2 !", action.payload);
+                    state.new_route["route_prototype"]["description"] = {
+                         "en": action.payload.cmt12,
+                         "pl": action.payload.cmt13,
+                         "ua": action.payload.cmt11
+                    }
+                    state.new_route["route_prototype"]["rules"] = {
+                         "en": action.payload.cmt22,
+                         "pl": action.payload.cmt23,
+                         "ua": action.payload.cmt21
+                    }
+                    state.new_route["route_prototype"]["transportation_rules"] = {
+                         "en": action.payload.cmt32,
+                         "pl": action.payload.cmt33,
+                         "ua": action.payload.cmt31
+                    }
+
+               },
+               prepare(cmt11, cmt12, cmt13, cmt21, cmt22, cmt23, cmt31, cmt32, cmt33) {
+                    return {
+                         payload: { cmt11, cmt12, cmt13, cmt21, cmt22, cmt23, cmt31, cmt32, cmt33 }
+                    }
+               }
+          },
           change2: (state) => {
                state.steps.secondStep = true;
           },
@@ -104,24 +129,47 @@ const createRouteLogic = createSlice({
           },
           addArrayDatetime: {
                reducer(state, action) {
-                   state.new_route.departure_dates.push(action.payload[0])
-                   
+                    state.new_route.departure_dates.push(action.payload[0])
+
                },
                prepare(date1, date2) {
-                   return {
-                       payload: [
-                           date1,
-                           date2
-                       ]
-   
-                   }
+                    return {
+                         payload: [
+                              date1,
+                              date2
+                         ]
+
+                    }
                }
-           }
+          },
+          addSubSpot: {
+               reducer(state, action) {
+                    state.new_route.route_prototype.sub_spots.push(action.payload)
+               },
+               prepare(country, city, street, map, time) {
+
+                    // if (time[0] === " ") {
+                    //      time = time.trimStart();
+                    // }
+                    return {
+                         payload: {
+                              "place": {
+                                   "country": country,
+                                   "city": city,
+                                   "street": street,
+                                   "map_url": map,
+                              },
+                              "from_start": time,
+                              "id": String(nanoid())
+                         }
+                    }
+               }
+          },
      },
      extraReducers: (builder) => {
 
      }
 })
 
-export const { change2, change3, change4, addArrayDatetime, createRoute1 } = createRouteLogic.actions;
+export const { change2, change3, change4, addArrayDatetime, addSubSpot, createRoute1, createRoute2 } = createRouteLogic.actions;
 export default createRouteLogic.reducer;

@@ -156,6 +156,21 @@ const CreateRouteFirst = () => {
                               <Button
                                    onClick={() => {
                                         sub({ from: dates1, to: dates2, func: dispatch })
+                                        setDates1([].map((number) =>
+                                        new DateObject().set({
+                                             day: number,
+                                             hour: number,
+                                             minute: number,
+                                             second: number,
+                                        })))
+
+                                        setDates2([].map((number) =>
+                                        new DateObject().set({
+                                             day: number,
+                                             hour: number,
+                                             minute: number,
+                                             second: number,
+                                        })))
                                         // console.log(`${dates1[0].day}-${dates1[0].month.number}-${dates1[0].year} ${dates1[0].hour}:${dates1[0].minute}:${dates1[0].second}`);
                                    }}
                                    variant="contained"
