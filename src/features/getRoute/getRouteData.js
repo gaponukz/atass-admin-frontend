@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
+
 const BASE_URL = "http://localhost:8000";
 
 export const getRouteGeneralInfo = createAsyncThunk("generalRoute/getRouteGeneralInfo", async () => {
