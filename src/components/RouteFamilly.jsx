@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux"
 import { useLocation } from "react-router-dom"
 import { getRouteFamillyInfo } from "../features/getRoute/getRouteData"
 import ShowInfoDetail from './ShowInfoDetail';
+import { setRoute } from '../features/editRoute/editRouteData';
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
@@ -26,7 +27,6 @@ const RouteFamilly = () => {
      const familly_routes = useSelector(state => state.routeGeneral.familly_routes)
 
      // console.log(move_from_city, move_to_city, familly_routes);
-
      useEffect(() => {
           dispatch(getRouteFamillyInfo({ move_from: move_from_city, move_to: move_to_city }))
      }, [])
@@ -100,7 +100,9 @@ const RouteFamilly = () => {
                                         <div className='ml-auto mr-4 gap-1 flex flex-row mt-2'>
                                              <div className=''>
                                                   <button onClick={() => {
-                                                       console.log("click");
+                                                       //console.log("click");
+                                                       //console.log(route);
+                                                       dispatch(setRoute(route));
                                                   }} ><NavLink to="/edit-route-1"><CiEdit className='no-underline text-black mt-1 mr-4' size={25} /></NavLink></button>
                                              </div>
                                              <div className=''>

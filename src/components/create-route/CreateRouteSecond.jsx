@@ -49,7 +49,18 @@ const CreateRouteSecond = () => {
      
      // logic
      const { register, handleSubmit, formState: { errors }, resetField } = useForm({
-          resolver: yupResolver(schema)
+          resolver: yupResolver(schema),
+          defaultValues: {
+            commentText11: new_route?.route_prototype.description?.ua,
+            commentText12: new_route?.route_prototype.description?.en,
+            commentText13: new_route?.route_prototype.description?.pl,
+            commentText21: new_route?.route_prototype.rules?.ua,
+            commentText22: new_route?.route_prototype.rules?.en,
+            commentText23: new_route?.route_prototype.rules?.pl,
+            commentText31: new_route?.route_prototype.transportation_rules?.ua,
+            commentText32: new_route?.route_prototype.transportation_rules?.en,
+            commentText33: new_route?.route_prototype.transportation_rules?.pl,
+          }
       })
 
      const onSubmit = (data) => {

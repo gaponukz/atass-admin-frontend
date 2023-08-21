@@ -21,8 +21,8 @@ import { change2, addArrayDatetime, createRoute1 } from "../../features/createRo
 const sub = ({ from, to, func }) => {
      //console.log(from, to, func);
      func(addArrayDatetime([
-          `${from[0].day}-${from[0].month.number}-${from[0].year} ${from[0].hour}:${from[0].minute}:${from[0].second}`,
-          `${to[0].day}-${to[0].month.number}-${to[0].year} ${to[0].hour}:${to[0].minute}:${to[0].second}`
+          `${from[0].year}-${(from[0].month.number).toString().padStart(2, "0")}-${(from[0].day).toString().padStart(2, "0")} ${from[0].hour}:${from[0].minute}:${from[0].second}`,
+          `${to[0].year}-${(to[0].month.number).toString().padStart(2, "0")}-${(to[0].day).toString().padStart(2, "0")} ${to[0].hour}:${to[0].minute}:${to[0].second}`
      ]))
 
 }

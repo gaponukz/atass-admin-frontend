@@ -50,7 +50,7 @@ const CreateRouteThird = () => {
   const [minutes, setMinutes] = useState("");
 
 
-  console.log(new_route);
+  //console.log(new_route);
   return (
     <div className="bg-white p-8 ">
             

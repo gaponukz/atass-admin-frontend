@@ -3,12 +3,25 @@ import axios from "axios";
 
 const BASE_URL = "http://localhost:8000";
 
+export const postNewRoute = createAsyncThunk("postRoute/postNewRoute", async ({ new_route }) => {
+     console.log(new_route);
+
+
+
+     const response = axios.post(`${BASE_URL}/add_routes`, {
+          headers: {
+               "Content-Type": "application/json",
+          },
+          new_route
+     })
+})
+
 const createRouteLogic = createSlice({
      name: "postRoute",
      initialState: {
           steps: {
                firstStep: true,
-               secondStep: true,
+               secondStep: false,
                thirdStep: false,
                fourthStep: false,
           },
@@ -30,7 +43,6 @@ const createRouteLogic = createSlice({
                               "street": "",
                               "mar_url": "",
                          },
-                         "from_start": 0,
                          "id": nanoid(),
                     },
                     "sub_spots": [],
@@ -55,6 +67,7 @@ const createRouteLogic = createSlice({
                },
                "departure_dates": []
           },
+          prices: {},
 
           test: "tetetete"
      },
@@ -165,11 +178,35 @@ const createRouteLogic = createSlice({
                     }
                }
           },
+          submitPrices: {
+               reducer(state, action) {
+                   state.new_route["route_prototype"]["prices"] = {...action.payload.prices};
+
+                   // state.new_route["route_prototype"]["sub_spots"] = {...action.payload.subspots};    
+               },  
+               prepare(prices, sub_spots) {
+                   return {
+                       payload: {
+                           "prices": prices,
+                           "subspots": sub_spots
+                       }
+                   }
+               }
+          },
      },
      extraReducers: (builder) => {
-
+          builder
+               .addCase(postNewRoute.pending, (state) => {
+                    console.log("?");
+               })
+               .addCase(postNewRoute.fulfilled, (state, action) => {
+                    console.log("+");
+               })
+               .addCase(postNewRoute.rejected, (state, action) => {
+                    console.log("-");
+               })
      }
 })
 
-export const { change2, change3, change4, addArrayDatetime, addSubSpot, createRoute1, createRoute2 } = createRouteLogic.actions;
+export const { change2, change3, change4, addArrayDatetime, submitPrices, addSubSpot, createRoute1, createRoute2 } = createRouteLogic.actions;
 export default createRouteLogic.reducer;
