@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { Checkbox, Modal, Button } from '@mui/material';
 import { CiEdit } from "react-icons/ci";
 import { AiFillDelete } from "react-icons/ai";
@@ -10,7 +10,7 @@ import { useDispatch } from "react-redux"
 import { useLocation } from "react-router-dom"
 import { getRouteFamillyInfo } from "../features/getRoute/getRouteData"
 import ShowInfoDetail from './ShowInfoDetail';
-import { setRoute } from '../features/editRoute/editRouteData';
+import { deleteCurrentRoute, setRoute } from '../features/editRoute/editRouteData';
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
@@ -20,13 +20,14 @@ const RouteFamilly = () => {
      const search = useLocation().search
      const searchParams = new URLSearchParams(search)
      const dispatch = useDispatch()
+     const navigate = useNavigate();
 
      // logic
      const move_from_city = searchParams.get("move_from_city")
      const move_to_city = searchParams.get("move_to_city")
      const familly_routes = useSelector(state => state.routeGeneral.familly_routes)
 
-     // console.log(move_from_city, move_to_city, familly_routes);
+     //console.log(move_from_city, move_to_city, familly_routes);
      useEffect(() => {
           dispatch(getRouteFamillyInfo({ move_from: move_from_city, move_to: move_to_city }))
      }, [])
@@ -41,6 +42,7 @@ const RouteFamilly = () => {
      const handleCloseDelete = () => setOpenDelete(false);
 
      const [selectedRoute, setSelectedRoute] = useState({});
+     const [selectedId, setSelectedId] = useState("");
 
      return (
           <>
@@ -73,7 +75,11 @@ const RouteFamilly = () => {
 
                                         <div className='w-auto'>
                                              <Button variant="outlined" color="error"
-                                                  onClick={() => { console.log("delete"); }}
+                                                  onClick={() => { 
+                                                       console.log("delete", selectedId); 
+                                                       dispatch(deleteCurrentRoute({id: selectedId}))
+                                                       navigate(0)
+                                                  }}
                                              >
                                                   Видалити
                                              </Button>
@@ -106,7 +112,11 @@ const RouteFamilly = () => {
                                                   }} ><NavLink to="/edit-route-1"><CiEdit className='no-underline text-black mt-1 mr-4' size={25} /></NavLink></button>
                                              </div>
                                              <div className=''>
-                                                  <Button onClick={handleOpenDelete} ><AiFillDelete className='no-underline text-black' size={23} /></Button>
+                                                  <Button onClick={() => {
+                                                            setSelectedId(familly_routes[index].id)
+                                                            //console.log(familly_routes[index].id);
+                                                            handleOpenDelete()
+                                                            }} ><AiFillDelete className='no-underline text-black' size={23} /></Button>
                                              </div>
                                              <div className=''>
                                                   <Button onClick={() => {

@@ -25,7 +25,7 @@ const EditRouteFirst = () => {
      const [activeKey2, setActiveKey2] = useState(1)
      const [activeKey3, setActiveKey3] = useState(1)
 
-     // console.log(route_to_change);
+     console.log(route_to_change);
      return (
           <div className="mt-[40px] mb-[80px]">
                <div className="border-2 border-gray-300 w-[600px] mx-auto flex flex-col rounded-lg p-4">

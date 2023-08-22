@@ -1,6 +1,6 @@
 
 
-import { AllRoutes, CreateRouteFirst, CreateRouteFourth, CreateRouteThird, EditRouteFirst, EditRouteSecond, HeaderNav, RouteFamilly } from "./components";
+import { AllRoutes, CreateRouteFirst, CreateRouteFourth, CreateRouteThird, EditRouteFirst, EditRouteSecond, EditRouteThird, HeaderNav, RouteFamilly } from "./components";
 import { Route, Routes } from "react-router-dom";
 import CreateRouteSecond from "./components/create-route/CreateRouteSecond";
 
@@ -26,6 +26,7 @@ function App() {
 
         <Route path="/edit-route-1" element={<EditRouteFirst />}/>
         <Route path="/edit-route-2" element={<EditRouteSecond />}/>
+        <Route path="/edit-route-3" element={<EditRouteThird />}/>
       </Routes>      
     </div>
   );

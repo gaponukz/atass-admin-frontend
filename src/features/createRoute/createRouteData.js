@@ -12,7 +12,8 @@ export const postNewRoute = createAsyncThunk("postRoute/postNewRoute", async ({ 
           headers: {
                "Content-Type": "application/json",
           },
-          new_route
+          route_prototype: new_route.route_prototype,
+          departure_dates: new_route.departure_dates
      })
 })
 
@@ -201,6 +202,57 @@ const createRouteLogic = createSlice({
                })
                .addCase(postNewRoute.fulfilled, (state, action) => {
                     console.log("+");
+                    state.new_route = {
+                         "route_prototype": {
+                              "move_from": {
+                                   "place": {
+                                        "country": "",
+                                        "city": "",
+                                        "street": "",
+                                        "mar_url": "",
+                                   },
+                                   "id": nanoid(),
+                              },
+                              "move_to": {
+                                   "place": {
+                                        "country": "",
+                                        "city": "",
+                                        "street": "",
+                                        "mar_url": "",
+                                   },
+                                   "id": nanoid(),
+                              },
+                              "sub_spots": [],
+                              "passengers_number": 0,
+                              "description": {
+                                   "ua": "",
+                                   "en": "",
+                                   "pl": ""
+                              },
+                              "rules": {
+                                   "ua": "",
+                                   "en": "",
+                                   "pl": ""
+                              },
+                              "transportation_rules": {
+                                   "ua": "",
+                                   "en": "",
+                                   "pl": ""
+                              },
+                              "is_active": true,
+                              "prices": {}
+                         },
+                         "departure_dates": []
+                    }
+
+                    state.steps = {
+                         firstStep: true,
+                         secondStep: false,
+                         thirdStep: false,
+                         fourthStep: false,
+                    }
+
+                    state.prices = {}
                })
                .addCase(postNewRoute.rejected, (state, action) => {
                     console.log("-");

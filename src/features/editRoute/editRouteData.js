@@ -4,6 +4,20 @@ import axios from "axios";
 
 const BASE_URL = "http://localhost:8000";
 
+export const updateCurrentRoute = createAsyncThunk("editRoute/updateCurrentRoute", async ({current_route}) => {
+    console.log(current_route);
+
+    const response = await axios.put(`${BASE_URL}/route`, {
+        route: current_route
+    });
+})
+
+export const deleteCurrentRoute = createAsyncThunk("editRoute/deleteCurrentRoute", async ({id}) => {
+    console.log(id);
+
+    const response = await axios.delete(`${BASE_URL}/route?route_id=${id}`)
+})
+
 const editRoute = createSlice({
      name: "editRoute",
      initialState: {
@@ -121,7 +135,25 @@ const editRoute = createSlice({
            }
      },
      extraReducers: (builder) => {
-
+        builder 
+            .addCase(updateCurrentRoute.pending, (state) => {
+                console.log("?");
+            })
+            .addCase(updateCurrentRoute.fulfilled, (state, action) => {
+                console.log("+");
+            })
+            .addCase(updateCurrentRoute.rejected, (state, action) => {
+                console.log("-");
+            })
+            .addCase(deleteCurrentRoute.pending, (state) => {
+                console.log("?");
+            })
+            .addCase(deleteCurrentRoute.fulfilled, (state, action) => {
+                console.log("+");
+            })
+            .addCase(deleteCurrentRoute.rejected, (state, action) => {
+                console.log("-");
+            })
      }
 })
 
