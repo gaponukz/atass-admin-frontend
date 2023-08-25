@@ -16,14 +16,16 @@ import { Button, TextField, Modal } from '@mui/material';
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import CheckSteps from "./CheckSteps";
-import { change2, addArrayDatetime, createRoute1 } from "../../features/createRoute/createRouteData";
+import { change2, addArrayDatetime, createRoute1, deleteArrayDatetime } from "../../features/createRoute/createRouteData";
 
 const sub = ({ from, to, func }) => {
-     //console.log(from, to, func);
+     // console.log(from, to, func);
      func(addArrayDatetime([
-          `${from[0].year}-${(from[0].month.number).toString().padStart(2, "0")}-${(from[0].day).toString().padStart(2, "0")} ${from[0].hour}:${from[0].minute}:${from[0].second}`,
-          `${to[0].year}-${(to[0].month.number).toString().padStart(2, "0")}-${(to[0].day).toString().padStart(2, "0")} ${to[0].hour}:${to[0].minute}:${to[0].second}`
+          `${from.year}-${(from.month).toString().padStart(2, "0")}-${(from.day).toString().padStart(2, "0")} ${from.hour}:${from.minute}:${from.second}`,
+          `${to.year}-${(to.month).toString().padStart(2, "0")}-${(to.day).toString().padStart(2, "0")} ${to.hour}:${to.minute}:${to.second}`
      ]))
+
+     //`${to[0].year}-${(to[0].month.number).toString().padStart(2, "0")}-${(to[0].day).toString().padStart(2, "0")} ${to[0].hour}:${to[0].minute}:${to[0].second}`
 
 }
 
@@ -52,24 +54,26 @@ const CreateRouteFirst = () => {
      const check = useSelector(state => state.createRoute.steps)
 
      const [dates1, setDates1] = useState(
-          [].map((number) =>
-               new DateObject().set({
-                    day: number,
-                    hour: number,
-                    minute: number,
-                    second: number,
-               })
-          )
+          new Date()
+          // [].map((number) =>
+          //      new DateObject().set({
+          //           day: number,
+          //           hour: number,
+          //           minute: number,
+          //           second: number,
+          //      })
+          // )
      );
      const [dates2, setDates2] = useState(
-          [].map((number) =>
-               new DateObject().set({
-                    day: number,
-                    hour: number,
-                    minute: number,
-                    second: number,
-               })
-          )
+          new Date()
+          // [].map((number) =>
+          //      new DateObject().set({
+          //           day: number,
+          //           hour: number,
+          //           minute: number,
+          //           second: number,
+          //      })
+          // )
      );
 
      const [openShow, setOpenShow] = useState(false);
@@ -116,14 +120,13 @@ const CreateRouteFirst = () => {
                          <p className="font-semibold text-xl p-2 mb-[0px]">Встановіть Дати</p>
                          <hr className="my-[1px]" />
                          <div className="flex flex-row p-6">
-                              <p>Час прибуття: </p>
+                              <p>Час відправлення: </p>
                               <DatePicker
-                                   style={{ height: "30px", width: "400px", marginLeft: '45px' }}
-                                   value={dates1}
-                                   className=""
-                                   onChange={setDates1}
+                                   style={{ height: "30px", width: "400px", marginLeft: "10px" }}
+                                   value={dates2}
+                                   onChange={setDates2}
                                    format="MM/DD/YYYY HH:mm:ss"
-                                   multiple
+                                   multiple={false}
                                    plugins={[
                                         <TimePicker position="bottom" />,
                                         <DatePanel markFocused />
@@ -132,13 +135,14 @@ const CreateRouteFirst = () => {
                          </div>
 
                          <div className="flex flex-row p-6">
-                              <p>Час відправлення: </p>
+                              <p>Час прибуття: </p>
                               <DatePicker
-                                   style={{ height: "30px", width: "400px", marginLeft: "10px" }}
-                                   value={dates2}
-                                   onChange={setDates2}
+                                   style={{ height: "30px", width: "400px", marginLeft: '45px' }}
+                                   value={dates1}
+                                   className=""
+                                   onChange={setDates1}
                                    format="MM/DD/YYYY HH:mm:ss"
-                                   multiple
+                                   multiple={false}
                                    plugins={[
                                         <TimePicker position="bottom" />,
                                         <DatePanel markFocused />
@@ -155,22 +159,11 @@ const CreateRouteFirst = () => {
 
                               <Button
                                    onClick={() => {
+                                        //console.log(dates1);
+                                        //console.log(`${dates1.day}-${dates1.month}-${dates1.year} ${dates1.hour}:${dates1.minute}:${dates1.second}`);
                                         sub({ from: dates1, to: dates2, func: dispatch })
-                                        setDates1([].map((number) =>
-                                        new DateObject().set({
-                                             day: number,
-                                             hour: number,
-                                             minute: number,
-                                             second: number,
-                                        })))
-
-                                        setDates2([].map((number) =>
-                                        new DateObject().set({
-                                             day: number,
-                                             hour: number,
-                                             minute: number,
-                                             second: number,
-                                        })))
+                                        setDates1(new Date())
+                                        setDates2(new Date())
                                         // console.log(`${dates1[0].day}-${dates1[0].month.number}-${dates1[0].year} ${dates1[0].hour}:${dates1[0].minute}:${dates1[0].second}`);
                                    }}
                                    variant="contained"
@@ -384,11 +377,20 @@ const CreateRouteFirst = () => {
                                    <p className="font-bold text-xl">Прибуття</p>
                               </div>
 
-                              {datetimes?.map(date => (
+                              {datetimes?.map((date, index) => (
                                    <div className="flex flex-row justify-between" key={nanoid()}>
-                                        <p className="">{date[0]}</p>
-                                        <p>{date[1]}</p>
+                                        <p className="">{date[1]}</p>
+                                        <p>{date[0]}</p>
                                         {/* <p>{months.indexOf(date[0].slice(4, 7))} {date[0].slice(8, 16)}</p>  */}
+                                        <button
+                                             type="button"
+                                             onClick={() => {
+                                                  
+                                                  dispatch(deleteArrayDatetime(index));
+                                             }}
+                                        >
+                                             <ImCancelCircle size={20} />
+                                        </button>
                                    </div>))}
                          </div>
 

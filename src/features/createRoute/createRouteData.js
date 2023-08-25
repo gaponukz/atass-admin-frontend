@@ -156,6 +156,12 @@ const createRouteLogic = createSlice({
                     }
                }
           },
+          deleteArrayDatetime: (state, action) => {
+               // console.log("cancel", action.payload);
+               state.new_route.departure_dates = state.new_route.departure_dates.slice(0, action.payload).concat(
+                    state.new_route.departure_dates.slice(action.payload + 1)
+               )
+          },
           addSubSpot: {
                reducer(state, action) {
                     state.new_route.route_prototype.sub_spots.push(action.payload)
@@ -260,5 +266,5 @@ const createRouteLogic = createSlice({
      }
 })
 
-export const { change2, change3, change4, addArrayDatetime, submitPrices, addSubSpot, createRoute1, createRoute2 } = createRouteLogic.actions;
+export const { change2, change3, change4, addArrayDatetime, deleteArrayDatetime, submitPrices, addSubSpot, createRoute1, createRoute2 } = createRouteLogic.actions;
 export default createRouteLogic.reducer;

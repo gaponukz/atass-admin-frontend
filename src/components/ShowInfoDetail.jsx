@@ -14,13 +14,13 @@ const ShowInfoDetail = (props) => {
                <div className="h-[450px] rounded-t-lg shadow-y-md flex flex-row justify-between p-2">
                     <div className="ml-5 mt-3">
                          <h3>Загальний опис</h3>
-                         <p>{props.info.description.en}</p>
+                         <p>{props.info.description.ua}</p>
 
                          <h3>Правила</h3>
-                         <p>{props.info.description.en}</p>
+                         <p>{props.info.description.ua}</p>
 
                          <h3>Правила перевезення</h3>
-                         <p>{props.info.description.en}</p>
+                         <p>{props.info.description.ua}</p>
 
                     </div>
 

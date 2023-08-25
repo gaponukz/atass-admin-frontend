@@ -2,9 +2,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { submitPrices } from '../features/createRoute/createRouteData';
 
 import { ToastContainer, toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const TableInput = ({ horizon, vertical }) => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const state_prices = useSelector(state => state.createRoute.prices)
     const subSpots = useSelector(state => state.createRoute.new_route.route_prototype.sub_spots)
     //console.log("here");
@@ -49,7 +51,7 @@ const TableInput = ({ horizon, vertical }) => {
                                                     onChange={(e) => {
                                                         prices[obj1.id][obj2.id] = Number(e.target.value);
                                                     }}
-                                                    placeholder="test"
+                                                    placeholder=""
                                                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                                 />}
                                             </div>
@@ -77,6 +79,7 @@ const TableInput = ({ horizon, vertical }) => {
                     e.preventDefault();
                     dispatch(submitPrices(prices, subSpots))
                     toast.success("Ціни успішно підтверджено!", { autoClose: 2000 })
+                    navigate("/")
                     //
                     //console.log("Final");
                     //console.log(currentRoute);

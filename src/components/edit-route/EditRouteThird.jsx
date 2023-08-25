@@ -4,11 +4,15 @@ import { useState } from "react";
 import { onChangeValue, updateCurrentRoute } from "../../features/editRoute/editRouteData";
 
 import { GrStatusGood } from "react-icons/gr";
+import { unwrapResult } from "@reduxjs/toolkit";
+import { useNavigate } from "react-router-dom";
 
 
 const EditRouteThird = () => {
 
      const dispatch = useDispatch()
+     const navigate = useNavigate()
+
      const route_to_change = useSelector(state => state.editRoute.route_to_change)
      console.log(route_to_change);
 
@@ -118,6 +122,10 @@ const EditRouteThird = () => {
                 className="flex flex-row mt-8 rounded-lg border-2 border-green-400 w-[130px] h-[40px] justify-center items-center"
                 onClick={() => {
                     dispatch(updateCurrentRoute({current_route: route_to_change}))
+                        .then(unwrapResult)
+                        .then((res) => {
+                            navigate("/")
+                        })
                 }}
             >
                 <p className=" text-redstone-900 mb-[5px] mr-[5px]">Підтвердити</p>
