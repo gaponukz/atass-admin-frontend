@@ -5,9 +5,6 @@ const BASE_URL = "http://localhost:8000";
 
 export const postNewRoute = createAsyncThunk("postRoute/postNewRoute", async ({ new_route }) => {
      console.log(new_route);
-
-
-
      const response = axios.post(`${BASE_URL}/add_routes`, {
           headers: {
                "Content-Type": "application/json",
@@ -69,6 +66,7 @@ const createRouteLogic = createSlice({
                "departure_dates": []
           },
           prices: {},
+          submit_price: false,
 
           test: "tetetete"
      },
@@ -188,6 +186,7 @@ const createRouteLogic = createSlice({
           submitPrices: {
                reducer(state, action) {
                    state.new_route["route_prototype"]["prices"] = {...action.payload.prices};
+                   state.submit_price = true;
 
                    // state.new_route["route_prototype"]["sub_spots"] = {...action.payload.subspots};    
                },  
