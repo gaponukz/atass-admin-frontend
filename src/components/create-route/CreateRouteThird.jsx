@@ -9,7 +9,7 @@ import { AiFillDelete } from "react-icons/ai";
 import { BiShow } from "react-icons/bi";
 
 import { useDispatch } from 'react-redux';
-import { change4, addSubSpot } from "../../features/createRoute/createRouteData";
+import { change4, addSubSpot, editSubRoute } from "../../features/createRoute/createRouteData";
 // import { change4, addSubSpot } from "../features/routeCreator/routeCreateSlice";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -31,6 +31,22 @@ const CreateRouteThird = () => {
   const [openShow, setOpenShow] = useState(false);
   const handleOpenShow = () => setOpenShow(true);
   const handleCloseShow = () => setOpenShow(false);
+  
+  // edit
+  const [openEditShow, setOpenEditShow] = useState(false);
+  const handleOpenEditShow = () => setOpenEditShow(true);
+  const handleCloseEditShow = () => setOpenEditShow(false);
+
+  const [editSRoute, setEditSubRoute] = useState({});
+  const [editSubRouteIndex, setEditSubRouteIndex] = useState(0);
+  const [countryE, setCountryE] = useState("");
+  const [cityE, setCityE] = useState("");
+  const [streetE, setStreetE] = useState("");
+  const [mapE, setMapE] = useState("");
+
+  const [daysE, setDaysE] = useState("");
+  const [hoursE, setHoursE] = useState("");
+  const [minutesE, setMinutesE] = useState("");
 
   const { handleSubmit } = useForm()
 
@@ -163,6 +179,125 @@ const CreateRouteThird = () => {
                 </div>
             </Modal>
 
+            {/* edit */}
+            <Modal
+                open={openEditShow}
+                onClose={handleCloseEditShow}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+                className='flex flex-row justify-center mt-5 '
+            >
+                <div className='w-3/4 h-5/6 bg-white text-black rounded-lg shadow-lg overflow-auto p-4 '>
+                    <p className="font-semibold text-xl p-2 mb-[0px]">Редагування проміжної точки</p>
+                    <hr className="my-[1px]" />
+
+                    <div className="p-4 flex flex-col">
+                        <TextField
+                            id="outlined-multiline-flexible"
+                            label="Країна"
+                            value={countryE}
+                            multiline
+                            className="mt-4 w-3/6"
+                            onChange={(e) => setCountryE(e.target.value)}
+                        />
+
+                        <TextField
+                            id="outlined-multiline-flexible"
+                            label="Місто"
+                            value={cityE}
+                            multiline
+                            className="mt-4 w-3/6"
+                            onChange={(e) => setCityE(e.target.value)}
+                        />
+
+                        <TextField
+                            id="outlined-multiline-flexible"
+                            label="Вулиця"
+                            value={streetE}
+                            multiline
+                            className="mt-4 w-3/6"
+                            onChange={(e) => setStreetE(e.target.value)}
+                        />
+
+                        <TextField
+                            id="outlined-multiline-flexible"
+                            label="Мапа"
+                            multiline
+                            value={mapE}
+                            className="mt-4 w-3/6 mb-4"
+                            onChange={(e) => setMapE(e.target.value)}
+                        />
+
+                        <div
+                            className="flex flex-row items-center justify-start gap-2"
+                        >
+                            <TextField
+                                id="outlined-multiline-flexible"
+                                label="Дні"
+                                multiline
+                                className=""
+                                value={daysE}
+                                onChange={(e) => setDaysE(e.target.value)}
+                            />
+                            <TextField
+                                id="outlined-multiline-flexible"
+                                label="Години"
+                                multiline
+                                className=""
+                                value={hoursE}
+                                onChange={(e) => setHoursE(e.target.value)}
+                            />
+                            <TextField
+                                id="outlined-multiline-flexible"
+                                label="Хвилини"
+                                multiline
+                                className=""
+                                value={minutesE}
+                                onChange={(e) => setMinutesE(e.target.value)}
+                            />
+                        </div>
+
+                    </div>
+
+                    <div className="flex flex-row gap-5 justify-center items-center mt-4 mb-4">
+                        <Button
+                            onClick={handleCloseEditShow}
+                            variant="contained"
+                            color="error"
+                        >Закрити</Button>
+
+                        <Button
+                            onClick={() => {
+                                
+                                // if (!days) 
+                                //   setDays(0);
+                                // else if (!hours)
+                                //   setHours(0);
+                                // else if (!minutes)
+                                //   setMinutes(0);
+
+                                // let time = days * 86400 + hours * 3600 + minutes * 60
+                                
+                                // dispatch(addSubSpot(country, city, street, map, time))
+                                // setCountry("");
+                                // setCity("");
+                                // setStreet("");
+                                // setMap("");
+                                // setDays("");
+                                // setHours("");
+                                // setMinutes("");
+
+                                // handleCloseEditShow();
+                                console.log("edit");
+                                dispatch(editSubRoute([editSRoute, editSubRouteIndex]))
+                            }}
+                            variant="contained"
+                        >Підтвердити</Button>
+                    </div>
+
+                </div>
+            </Modal>
+
             <div className="border-2 border-gray-300 w-[600px] mx-auto flex flex-col rounded-lg p-4">
                 <div className="flex flex-row gap-1">
                     <CheckSteps check={check}/>
@@ -170,7 +305,7 @@ const CreateRouteThird = () => {
 
                 <form onSubmit={handleSubmit(onSubmit)} className="min-h-[200px]">
 
-                    {subSpots.map((obj) => (
+                    {subSpots.map((obj, index) => (
                         <div key={obj.id} className="rounded-lg">
                             <div className="flex flex-row justify-between gap-1">
                                 <div className="flex flex-row justify-start gap-1">
@@ -180,8 +315,21 @@ const CreateRouteThird = () => {
                                 </div>
                                 <div className="flex flex-row justify-center gap-3">
                                     <AiFillDelete size={23} />
-                                    <BiShow size={23} />
-                                    <CiEdit size={23} />
+                                    <CiEdit onClick={() => {
+                                        console.log(obj);
+                                        setEditSubRoute(obj);
+                                        setEditSubRouteIndex(index);
+
+                                        setCountryE(obj.place.country);
+                                        setCityE(obj.place.city);
+                                        setStreetE(obj.place.street);
+
+                                        setDaysE(Math.floor(obj.from_start / 86400));
+                                        setHoursE(Math.floor(obj.from_start % 86400 / 3600));
+                                        setMinutesE(Math.floor(obj.from_start % 3600 / 60))
+
+                                        handleOpenEditShow()
+                                        }} size={23} />
                                 </div>
                             </div>
                             <p>Прибуде через: Днів: {Math.floor(obj.from_start / 86400).toString().padStart(1, "0")} Годин: {

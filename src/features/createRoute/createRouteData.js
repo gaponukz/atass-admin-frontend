@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk, nanoid } from "@reduxjs/toolkit";
 import axios from "axios";
+import { act } from "react-dom/test-utils";
 
 const BASE_URL = "http://localhost:8000";
 
@@ -160,6 +161,9 @@ const createRouteLogic = createSlice({
                     state.new_route.departure_dates.slice(action.payload + 1)
                )
           },
+          editSubRoute: (state, action) => {
+               console.log(action.payload);
+          },
           addSubSpot: {
                reducer(state, action) {
                     state.new_route.route_prototype.sub_spots.push(action.payload)
@@ -265,5 +269,5 @@ const createRouteLogic = createSlice({
      }
 })
 
-export const { change2, change3, change4, addArrayDatetime, deleteArrayDatetime, submitPrices, addSubSpot, createRoute1, createRoute2 } = createRouteLogic.actions;
+export const { change2, change3, change4, addArrayDatetime, deleteArrayDatetime, submitPrices, addSubSpot, createRoute1, createRoute2, editSubRoute } = createRouteLogic.actions;
 export default createRouteLogic.reducer;
