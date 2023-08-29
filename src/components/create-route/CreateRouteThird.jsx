@@ -9,7 +9,7 @@ import { AiFillDelete } from "react-icons/ai";
 import { BiShow } from "react-icons/bi";
 
 import { useDispatch } from 'react-redux';
-import { change4, addSubSpot, editSubRoute } from "../../features/createRoute/createRouteData";
+import { change4, addSubSpot, editSubRoute, deleteSubRoute } from "../../features/createRoute/createRouteData";
 // import { change4, addSubSpot } from "../features/routeCreator/routeCreateSlice";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -47,6 +47,9 @@ const CreateRouteThird = () => {
   const [daysE, setDaysE] = useState("");
   const [hoursE, setHoursE] = useState("");
   const [minutesE, setMinutesE] = useState("");
+  
+  // delete
+
 
   const { handleSubmit } = useForm()
 
@@ -314,9 +317,11 @@ const CreateRouteThird = () => {
                                     <p className="text-xl font-bold">{obj.place.street}</p>
                                 </div>
                                 <div className="flex flex-row justify-center gap-3">
-                                    <AiFillDelete size={23} />
+                                    <AiFillDelete size={23} onClick={() => {
+                                        dispatch(deleteSubRoute(index));
+                                    }}/>
                                     <CiEdit onClick={() => {
-                                        console.log(obj);
+                                        // console.log(obj);
                                         setEditSubRoute(obj);
                                         setEditSubRouteIndex(index);
 
