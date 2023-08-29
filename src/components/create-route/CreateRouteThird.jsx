@@ -271,28 +271,31 @@ const CreateRouteThird = () => {
 
                         <Button
                             onClick={() => {
-                                
-                                // if (!days) 
-                                //   setDays(0);
-                                // else if (!hours)
-                                //   setHours(0);
-                                // else if (!minutes)
-                                //   setMinutes(0);
 
-                                // let time = days * 86400 + hours * 3600 + minutes * 60
-                                
-                                // dispatch(addSubSpot(country, city, street, map, time))
-                                // setCountry("");
-                                // setCity("");
-                                // setStreet("");
-                                // setMap("");
-                                // setDays("");
-                                // setHours("");
-                                // setMinutes("");
+                                if (!daysE) 
+                                setDays(0);
+                              else if (!hoursE)
+                                setHours(0);
+                              else if (!minutesE)
+                                setMinutes(0);
 
-                                // handleCloseEditShow();
-                                console.log("edit");
-                                dispatch(editSubRoute([editSRoute, editSubRouteIndex]))
+                              let timeE = daysE * 86400 + hoursE * 3600 + minutesE * 60
+                                
+                                const edit_obj = {
+                                    "place": {
+                                        "country": countryE,
+                                        "city": cityE,
+                                        "street": streetE
+                                    },
+                                    "from_start": timeE,
+                                    "id": editSRoute.id
+                                    };
+
+                                
+                                // console.log("edit");
+                                dispatch(editSubRoute([edit_obj, editSubRouteIndex]))
+
+                                handleCloseEditShow();
                             }}
                             variant="contained"
                         >Підтвердити</Button>

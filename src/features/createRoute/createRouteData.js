@@ -162,7 +162,10 @@ const createRouteLogic = createSlice({
                )
           },
           editSubRoute: (state, action) => {
-               console.log(action.payload);
+               //console.log("Edit");
+               //console.log(action.payload);
+               let [objE, indexE] = action.payload;
+               state.new_route.route_prototype.sub_spots[indexE] = {...objE};
           },
           deleteSubRoute: (state, action) => {
                // console.log(action.payload);
