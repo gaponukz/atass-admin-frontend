@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 
-const BASE_URL = "http://localhost:8000";
+const BASE_URL = "http://139.28.37.204/api/routes";
 
 export const updateCurrentRoute = createAsyncThunk("editRoute/updateCurrentRoute", async ({current_route}) => {
     console.log(current_route);

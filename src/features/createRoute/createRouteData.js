@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk, nanoid } from "@reduxjs/toolkit";
 import axios from "axios";
 import { act } from "react-dom/test-utils";
 
-const BASE_URL = "http://localhost:8000";
+const BASE_URL = "http://139.28.37.204/api/routes";
 
 export const postNewRoute = createAsyncThunk("postRoute/postNewRoute", async ({ new_route }) => {
      console.log(new_route);
