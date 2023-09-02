@@ -84,19 +84,40 @@ const EditRouteThird = () => {
                                         )
                                     }
                                     else {
-                                        return (
-                                            <div className='flex flex-row' key={`${obj1.id}-${obj2.id}`}>
-                                                {<input
-                                                    onChange={(e) => {
-                                                        //prices[obj1.id][obj2.id] = e.target.value;
-                                                        dispatch(onChangeValue([obj1.id, obj2.id, e.target.value], "change_price"))
-                                                    }}
-                                                    placeholder=""
-                                                    value={prices[obj1.id][obj2.id]}
-                                                    className="shadow appearance-none border rounded w-[90px] py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                                />}
-                                            </div>
-                                        )
+                                        // console.log(obj1.id, obj2.id);
+                                        if (prices[obj1.id]) {
+                                            return (
+                                                <div className='flex flex-row' key={`${obj1.id}-${obj2.id}`}>
+                                                    {
+                                                        <input
+                                                        onChange={(e) => {
+                                                            //prices[obj1.id][obj2.id] = e.target.value;
+                                                            dispatch(onChangeValue([obj1.id, obj2.id, e.target.value], "change_price"))
+                                                        }}
+                                                        placeholder=""
+                                                        value={prices[obj1.id][obj2.id]}
+                                                        className="shadow appearance-none border rounded w-[90px] py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                                    />
+                                                    }
+                                                </div>)
+                                        }
+                                        else { // edit
+                                            return (
+                                            <div className='flex flex-row' key={`${obj1?.id}-${obj2?.id}`}>
+                                                    {
+                                                        <input
+                                                        onChange={(e) => {
+                                                            //prices[obj1.id][obj2.id] = e.target.value;
+                                                            dispatch(onChangeValue([obj1?.id, obj2?.id, e.target.value], "change_price"))
+                                                        }}
+                                                        placeholder=""
+                                                        value={""}
+                                                        className="shadow appearance-none border rounded w-[90px] py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                                    />
+                                                    }
+                                                </div>)
+                                        }
+                                        
                                     }
                                 }
                                 else {
