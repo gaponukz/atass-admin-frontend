@@ -37,9 +37,9 @@ const ShowInfoDetail = (props) => {
                                    <p>Час: {props.info.move_from.date}</p>
                               </div>
                               {props.info.passengers.map((passenger) => {
-                                   if (passenger.moving_from.place.country === props.info.move_from.place.country &&
-                                        passenger.moving_from.place.city === props.info.move_from.place.city &&
-                                        passenger.moving_from.place.street === props.info.move_from.place.street)
+                                   if (passenger?.moving_from?.place?.country === props?.info?.move_from?.place?.country &&
+                                        passenger?.moving_from?.place?.city === props?.info?.move_from?.place?.city &&
+                                        passenger?.moving_from?.place?.street === props?.info?.move_from?.place?.street)
                                         return (
                                              <div key={passenger.moving_from.id} className="border-t-2 border-grey-600 flex flex-row justify-start pt-1 gap-x-2">
                                                   <div className="w-auto h-[25px] bg-blue-600 px-[5px] rounded-lg font-bold text-white ml-[20px]">Заходить</div>
@@ -75,9 +75,9 @@ const ShowInfoDetail = (props) => {
                                    <a href={`${props.info.move_to.place.map_url}`}>Побачити на карті</a>
                                    <p>Час: {props.info.move_to.date}</p>
                                    {props.info.passengers.map((passenger) => {
-                                        if (passenger.moving_towards.place.country === props.info.move_to.place.country &&
-                                             passenger.moving_towards.place.city === props.info.move_to.place.city &&
-                                             passenger.moving_towards.place.street === props.info.move_to.place.street)
+                                        if (passenger?.moving_towards?.place?.country === props?.info?.move_to?.place?.country &&
+                                             passenger?.moving_towards?.place?.city === props?.info?.move_to?.place?.city &&
+                                             passenger?.moving_towards?.place?.street === props?.info?.move_to?.place?.street)
                                              return (
                                                   <div className="border-t-2 border-grey-600 flex flex-row justify-start pt-1 gap-x-2">
                                                        <div className="w-auto h-[25px] bg-blue-600 px-[5px] rounded-lg font-bold text-white ml-[20px]">Виходить</div>

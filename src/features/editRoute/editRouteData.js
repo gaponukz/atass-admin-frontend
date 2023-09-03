@@ -116,10 +116,23 @@ const editRoute = createSlice({
    
                        case "change_price":
                            console.log("here", action.payload[0]);
+                           console.log(state.route_to_change);
+                           const fromDb = undefined;
+
                            let id1 = action.payload[0].at(0);
                            let id2 = action.payload[0].at(1);
                            let price = action.payload[0].at(2);
-                           state.route_to_change.prices[id1][id2] = Number(price);
+
+                           if (!state.route_to_change.prices[id1]) {
+                            // console.log("tyt");
+                            state.route_to_change.prices[id1] = {
+                                id2: Number(price)
+                            }
+                           }else {
+                            state.route_to_change.prices[id1][id2] = Number(price);
+                           }
+
+                           
                            break
                    }
                    
