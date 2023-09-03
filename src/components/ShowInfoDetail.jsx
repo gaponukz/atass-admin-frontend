@@ -10,7 +10,7 @@ const ShowInfoDetail = (props) => {
      //console.log(arr1);
 
      return (
-          <div className="w-4/6 overflow-auto flex flex-row bg-white relative rounded-lg p-1">
+          <div className="w-4/6 overflow-auto flex flex-row bg-white relative rounded-lg p-1" style={{width:'90%', height:"90%"}}>
                <div className="h-[450px] rounded-t-lg shadow-y-md flex flex-col justify-between p-2">
                     <div className="ml-5 mt-3">
                          <h3>Загальний опис</h3>

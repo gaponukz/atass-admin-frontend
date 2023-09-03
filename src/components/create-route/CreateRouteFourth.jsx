@@ -89,7 +89,7 @@ const CreateRouteFourth = () => {
                                 <div>
                                     <div className='flex flex-row gap-1'>
                                         {horizon.map(obj1 => {
-                                            return (<div key={obj1.id} className='flex flex-col gap-3 mt-1 ml-3'>
+                                            return (<div key={obj1.id} className='flex flex-col gap-3 mt-1 ml-3' >
                                                 {vertical.map(obj2 => {
                                                     checkr.push(String(`${obj1.id}-${obj2.id}`))
                                                     check_rvs.push(String(`${obj2.id}-${obj1.id}`))
