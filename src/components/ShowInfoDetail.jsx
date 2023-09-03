@@ -10,8 +10,8 @@ const ShowInfoDetail = (props) => {
      //console.log(arr1);
 
      return (
-          <div className="w-4/6 overflow-auto flex flex-col bg-white relative rounded-lg p-1">
-               <div className="h-[450px] rounded-t-lg shadow-y-md flex flex-row justify-between p-2">
+          <div className="w-4/6 overflow-auto flex flex-row bg-white relative rounded-lg p-1">
+               <div className="h-[450px] rounded-t-lg shadow-y-md flex flex-col justify-between p-2">
                     <div className="ml-5 mt-3">
                          <h3>Загальний опис</h3>
                          <p>{props.info.description.ua}</p>
@@ -24,7 +24,7 @@ const ShowInfoDetail = (props) => {
 
                     </div>
 
-                    <div className="">
+                    <div className="flex flex-row">
                          <div className="w-[286px] h-auto border-2 border-grey-600 rounded-lg mr-[50px] mt-2">
                               <div className="p-2">
                                    <p className="text-2xl font-bold ">{props.info.move_from.place.city}</p>
@@ -48,7 +48,8 @@ const ShowInfoDetail = (props) => {
                                         )
                               })}
                          </div>
-
+                         
+                         <div className="flex flex-row">
                          {props.info.sub_spots.map((road, index) => (
                               <div key={index} className="w-[286px] h-auto border-2 border-grey-600 rounded-lg mr-[50px] mt-2" >
                                    <div className="p-2">
@@ -63,6 +64,7 @@ const ShowInfoDetail = (props) => {
                                    </div>
                               </div>
                          ))}
+                         </div>
 
                          <div className="w-[286px] h-auto border-2 border-grey-600 rounded-lg mr-[50px] mt-2">
                               <div className="p-2">
@@ -87,7 +89,7 @@ const ShowInfoDetail = (props) => {
                                    })}
                               </div>
                          </div>
-                         <div className="absolute ml-[-450px] ">
+                         <div className="absolute ml-[450px] mt-[450px]">
                               <div className="relative border-2 border-600-gray p-4 rounded-md">
                                    <div className="flex flex-row gap-6 ml-[90px] font-bold text-xl">
                                         {arr.map(obg => (<div>{obg.place.city}</div>))}

@@ -13,6 +13,7 @@ import ShowInfoDetail from './ShowInfoDetail';
 import { deleteCurrentRoute, setRoute } from '../features/editRoute/editRouteData';
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+// <Checkbox {...label} checked={route.is_active} />
 
 const RouteFamilly = () => {
 
@@ -27,7 +28,7 @@ const RouteFamilly = () => {
      const move_to_city = searchParams.get("move_to_city")
      const familly_routes = useSelector(state => state.routeGeneral.familly_routes)
 
-     //console.log(move_from_city, move_to_city, familly_routes);
+     console.log(familly_routes);
      useEffect(() => {
           dispatch(getRouteFamillyInfo({ move_from: move_from_city, move_to: move_to_city }))
      }, [])
@@ -90,8 +91,9 @@ const RouteFamilly = () => {
                               {familly_routes.map((route, index) => (
 
                                    <div className='flex flex-row border-b-2 border-gray-300' key={route.move_from.id}>
-                                        <Checkbox {...label} defaultChecked />
+                                        <input type="checkbox"  checked={route.is_active}/>
                                         <div key={index}>
+                                             
                                              <div className=''>
                                                   <div className='relative px-1'>
                                                        <div className='flex flex-row gap-1 '>

@@ -14,7 +14,6 @@ function App() {
       <Routes>
         {/* admin */}
         <Route path="/" element={<AllRoutes />}/>
-        <Route path="/users" element={<>Users</>}/>
 
         {/* route */}
         <Route path="/route" element={<RouteFamilly />}/>
