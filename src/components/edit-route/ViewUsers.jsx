@@ -2,6 +2,7 @@ import { GrFormNextLink } from "react-icons/gr"
 import { useDispatch, useSelector } from "react-redux"
 import { NavLink, useNavigate } from "react-router-dom"
 import { Table } from "react-bootstrap"
+import { deleteUser } from "../../features/editRoute/editRouteData"
 
 const ViewUsers = () => {
 
@@ -26,11 +27,12 @@ const ViewUsers = () => {
                               <th>Gmail</th>
                               <th>In</th>
                               <th>Out</th>
+                              <th>Delete</th>
                          </tr>
                     </thead>
                     <tbody>
                          <tr>
-                              {passengers.map((passenger) => {
+                              {passengers.map((passenger, index) => {
                                    count++;
                     //console.log("u");
                     let move_in = "";
@@ -69,7 +71,11 @@ const ViewUsers = () => {
                                              <td>{passenger.gmail}</td>
                                              <td>{move_in}</td>
                                              <td>{move_out}</td>
-
+                                             <td
+                                                  onClick={() => {
+                                                       dispatch(deleteUser(index))
+                                                  }}
+                                             >delete</td>
                                         </>
                                    )
                               })}
