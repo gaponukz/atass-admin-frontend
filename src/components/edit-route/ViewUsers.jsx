@@ -67,7 +67,7 @@ const ViewUsers = () => {
                                              <td>{passenger.full_name}</td>
                                              <td>{passenger.phone_number}</td>
                                              <td>{passenger.gmail}</td>
-                                             <td>{passenger.gmail}</td>
+                                             <td>{move_in}</td>
                                              <td>{move_out}</td>
 
                                         </>
