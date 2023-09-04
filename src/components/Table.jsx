@@ -9,7 +9,7 @@ const Table = (props) => {
         <div>
             <div className='flex flex-row gap-1'>
                 {props.arr?.map(obj1 => {
-                    return (<div className='flex flex-col gap-3 mt-1 ml-3'>
+                    return (<div className='flex flex-col gap-3 mt-1 ml-3' style={{marginLeft:'6%'}}>
                         {props.arr1?.map(obj2 => {
                             if (obj1?.id !== obj2?.id) {
                                 check.push(String(`${obj1?.place?.city}-${obj2?.place?.city}`))
