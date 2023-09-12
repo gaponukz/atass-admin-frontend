@@ -90,8 +90,8 @@ const RouteFamilly = () => {
 
                               {familly_routes.map((route, index) => (
 
-                                   <div className='flex flex-row border-b-2 border-gray-300' key={route.move_from.id}>
-                                        <input type="checkbox"  checked={route.is_active}/>
+                                   <div className='flex flex-row border-b-2 border-gray-300' key={route.move_from.id} style={{paddingLeft:"4%"}}>
+                                        <input type="checkbox"  checked={route.is_active} style={{}}/>
                                         <div key={index}>
                                              
                                              <div className=''>
