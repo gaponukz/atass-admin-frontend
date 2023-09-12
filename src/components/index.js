@@ -8,6 +8,7 @@ import CreateRouteFourth from "./create-route/CreateRouteFourth";
 import EditRouteFirst from "./edit-route/EditRouteFirst";
 import EditRouteSecond from "./edit-route/EditRouteSecond";
 import EditRouteThird from "./edit-route/EditRouteThird";
+import ViewUsers from "./edit-route/ViewUsers";
 
 export {
      HeaderNav,
@@ -19,5 +20,6 @@ export {
      CreateRouteFourth,
      EditRouteFirst,
      EditRouteSecond,
-     EditRouteThird
+     EditRouteThird,
+     ViewUsers
 }

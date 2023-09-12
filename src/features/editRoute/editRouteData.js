@@ -145,6 +145,12 @@ const editRoute = createSlice({
                        ]
                    }
                }
+           },
+           deleteUser: (state, action) => {
+            console.log("t",action.payload);
+            state.route_to_change.passengers = state.route_to_change.passengers.slice(0, action.payload).concat(
+                state.route_to_change.passengers.slice(action.payload + 1)
+           )
            }
      },
      extraReducers: (builder) => {
@@ -170,5 +176,5 @@ const editRoute = createSlice({
      }
 })
 
-export const { setRoute, onChangeValue } = editRoute.actions;
+export const { setRoute, onChangeValue, deleteUser} = editRoute.actions;
 export default editRoute.reducer;
