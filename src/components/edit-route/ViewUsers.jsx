@@ -31,7 +31,7 @@ const ViewUsers = () => {
                          </tr>
                     </thead>
                     <tbody>
-                         <tr>
+                         <>
                               {passengers.map((passenger, index) => {
                                    count++;
                     //console.log("u");
@@ -64,7 +64,7 @@ const ViewUsers = () => {
                          move_out = route_to_change.move_to.place.city
 
                                    return (
-                                        <>
+                                        <tr>
                                              <td>{count}</td>
                                              <td>{passenger.full_name}</td>
                                              <td>{passenger.phone_number}</td>
@@ -76,10 +76,10 @@ const ViewUsers = () => {
                                                        dispatch(deleteUser(index))
                                                   }}
                                              >delete</td>
-                                        </>
+                                        </tr>
                                    )
                               })}
-                         </tr>
+                         </>
                          
                     </tbody>
                </Table>
