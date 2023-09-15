@@ -18,6 +18,17 @@ export const deleteCurrentRoute = createAsyncThunk("editRoute/deleteCurrentRoute
     const response = await axios.delete(`${BASE_URL}/route?route_id=${id}`)
 })
 
+export const deletePassenger = createAsyncThunk("editRoute/deletePassenger", async ({r_id, move_f_id, move_t_id, p_id}) => {
+
+
+    const response = await axios.delete(`${BASE_URL}/passenger`, {
+        "route_id": r_id,
+        "move_from_id": move_f_id,
+        "move_to_id": move_t_id,
+        "passenger_id": p_id,
+    })
+})
+
 const editRoute = createSlice({
      name: "editRoute",
      initialState: {
@@ -172,6 +183,15 @@ const editRoute = createSlice({
             })
             .addCase(deleteCurrentRoute.rejected, (state, action) => {
                 console.log("-");
+            })
+            .addCase(deletePassenger.pending, (state) => {
+                console.log("p?");
+            })
+            .addCase(deletePassenger.fulfilled, (state, action) => {
+                console.log("p+");
+            })
+            .addCase(deletePassenger.rejected, (state, action) => {
+                console.log("p-");
             })
      }
 })

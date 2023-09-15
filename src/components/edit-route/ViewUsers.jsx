@@ -2,7 +2,8 @@ import { GrFormNextLink } from "react-icons/gr"
 import { useDispatch, useSelector } from "react-redux"
 import { NavLink, useNavigate } from "react-router-dom"
 import { Table } from "react-bootstrap"
-import { deleteUser } from "../../features/editRoute/editRouteData"
+import { deleteUser, deletePassenger } from "../../features/editRoute/editRouteData"
+import { unwrapResult } from "@reduxjs/toolkit"
 
 const ViewUsers = () => {
 
@@ -73,7 +74,14 @@ const ViewUsers = () => {
                                              <td>{move_out}</td>
                                              <td
                                                   onClick={() => {
-                                                       dispatch(deleteUser(index))
+                                                       //console.log({ r_id: route_to_change.id, move_f_id: route_to_change.move_from.id, move_t_id: route_to_change.move_to.id, p_id: passenger.id });
+
+                                                       dispatch(deletePassenger({ r_id: route_to_change.id, move_f_id: route_to_change.move_from.id, move_t_id: route_to_change.move_to.id, p_id: passenger.id }))
+                                                            .then(unwrapResult)
+                                                            .then((res) => {
+                                                                 dispatch(deleteUser(index))
+                                                            })
+                                                       //dispatch(deleteUser(index))
                                                   }}
                                              >delete</td>
                                         </tr>
